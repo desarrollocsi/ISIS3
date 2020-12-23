@@ -1,0 +1,20 @@
+<nav id="sidebar">
+    <div class="sidebar-header">
+        <h5>Clinica Santa Isabel</h5>
+    </div>
+    <ul class="list-unstyled components" >
+        <li class="active" *ngFor="let menu of menus$ | async">
+            <a href="{{'#Menu'+menu.id}}"  data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">{{menu.nombre}}</a>
+            <ul  class="collapse list-unstyled" id="{{'Menu'+menu.id}}">
+                <li *ngFor="let submenu of menu.children">
+                    <a href="{{'#Submenu'+submenu.id}}"data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">{{submenu.nombre}}</a>
+                    <ul class="collapse list-unstyled" id="{{'Submenu'+submenu.id}}">
+                        <li *ngFor="let subsubmenu of submenu.children">
+                            <a routerLink={{subsubmenu.accion}}>{{subsubmenu.nombre}}</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>
