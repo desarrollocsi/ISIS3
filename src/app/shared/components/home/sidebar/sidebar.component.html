@@ -1,16 +1,16 @@
 <nav id="sidebar">
     <div class="sidebar-header">
-        <h5>Clinica Santa Isabel</h5>
+        <img src="../../../../../assets/img/Logo-csi-color.svg">
     </div>
-    <ul class="list-unstyled components" >
-        <li class="active" *ngFor="let menu of menus$ | async">
-            <a href="{{'#Menu'+menu.id}}"  data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">{{menu.nombre}}</a>
-            <ul  class="collapse list-unstyled" id="{{'Menu'+menu.id}}">
+    <ul class="list-unstyled components">
+        <li *ngFor="let menu of menus$ | async">
+            <a href="{{'#Menu'+menu.id}}"  data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">{{menu.nombre | titlecase}}</a>
+            <ul  class="collapse" id="{{'Menu'+menu.id}}">
                 <li *ngFor="let submenu of menu.children">
-                    <a href="{{'#Submenu'+submenu.id}}"data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">{{submenu.nombre}}</a>
-                    <ul class="collapse list-unstyled" id="{{'Submenu'+submenu.id}}">
+                    <a href="{{'#Submenu'+submenu.id}}" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">{{submenu.nombre | titlecase}}</a>
+                    <ul class="collapse" id="{{'Submenu'+submenu.id}}">
                         <li *ngFor="let subsubmenu of submenu.children">
-                            <a routerLink={{subsubmenu.accion}}>{{subsubmenu.nombre}}</a>
+                            <a routerLink={{subsubmenu.accion}} >{{subsubmenu.nombre | titlecase}}</a>
                         </li>
                     </ul>
                 </li>

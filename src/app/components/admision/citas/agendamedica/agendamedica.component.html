@@ -1,1 +1,201 @@
-<p>agendamedica works!</p>
+    <div class="card border-0">
+        <div class="card-body">
+            <div class="card-title mb-4 text-center"><h1>Acto Medico</h1></div>
+            <div class="w-100 px-2">
+                <div class="card border-0 shadow-card px-2">
+                    <div class="card-body">
+                        <div class="card-title"><h6>DATOS DEL PACIENTE</h6></div>
+                        <div class="card-text">
+                            paciente
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="d-flex flex-wrap w-100">
+                <div class="w-50 mw-50 px-2">
+                    <div class="card border-0 shadow-card mt-3">
+                        <div class="card-body">
+                            <div class="card-title mb-4"><h4>Registros</h4></div>
+                            <div  class="form-label-group">
+                                <textarea id="motivo" placeholder="Motivo de Consulta" class="form-control"></textarea>
+                                <label for="motivo">Motivo de Consulta</label>
+                            </div>
+
+                            <div class="form-label-group">
+                                <textarea id="enfermedad"  placeholder="Enfermedad o Problema Actual" class="form-control"></textarea>
+                                <label for="enfermedad">Enfermedad o Problema Actual</label>
+                            </div>
+
+
+                            <div class="form-label-group">
+                                <textarea id="examen" class="form-control" placeholder="Examen Fisico"></textarea>
+                                <label for="examen">Examen Fisico</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Signo Vitales-->
+                    <div class="card mt-3 border-0 shadow-card">
+                        <div class="card-body">
+                            <div class="card-title mb-4"><h4>Signos Vitales</h4></div>
+                            <div class="d-flex flex-wrap w-100 justify-content-between">
+                                <div class="w-50 mw-50 p-1">
+                                    <div class="form-label-group">
+                                        <input
+                                          type="text"
+                                          id="presion"
+                                          class="form-control"
+                                          placeholder="Presion Arterial"
+                                        />
+                                        <label for="presion">Presion Arterial</label>
+                                      </div>
+
+                                      <div class="form-label-group">
+                                        <input
+                                          type="text"
+                                          id="frecuencia"
+                                          class="form-control"
+                                          placeholder="F. Cardiaca(min)"
+                                        />
+                                        <label for="frecuencia">F. Cardiaca(min)</label>
+                                      </div> 
+                                      <div class="form-label-group">
+                                        <input
+                                          type="text"
+                                          id="respiratoria"
+                                          class="form-control"
+                                          placeholder="F.Respiratoria(min)"
+                                        />
+                                        <label for="respiratoria">F.Respiratoria(min)</label>
+                                      </div>
+                                      <div class="form-label-group">
+                                        <input
+                                          type="text"
+                                          id="bucal"
+                                          class="form-control"
+                                          placeholder="Temp. Bucal(c)"
+                                        />
+                                        <label for="bucal">Temp. Bucal(c)</label>
+                                      </div>
+                                      <div class="form-label-group">
+                                        <input
+                                          type="text"
+                                          id="axiliar"
+                                          class="form-control"
+                                          placeholder="Temp. Axilar(c)"
+                                        />
+                                        <label for="axiliar">Temp. Axilar(c)</label>
+                                      </div>
+
+                                </div>
+                                <div class="w-50 mw-50 p-1">
+                                    <div class="form-label-group">
+                                        <input
+                                          type="text"
+                                          id="peso"
+                                          class="form-control"
+                                          placeholder="Peso(kg)"
+                                        />
+                                        <label for="peso">Peso(kg)</label>
+                                    </div>
+                                    <div class="form-label-group">
+                                        <input
+                                          type="text"
+                                          id="talla"
+                                          class="form-control"
+                                          placeholder="Talla(m)"
+                                        /><label for="talla">Talla(m)</label>
+                                    </div>
+                                    <div class="form-label-group">
+                                        <input
+                                          type="text"
+                                          id="masa"
+                                          class="form-control"
+                                          placeholder="I.Masa corporal"
+                                        /><label for="masa">I.Masa corporal</label>
+                                    </div>
+                                    <div class="form-label-group">
+                                        <input
+                                          type="text"
+                                          id="perim"
+                                          class="form-control"
+                                          placeholder="Perim Cefalico(cm)"
+                                        /><label for="perim">Perim Cefalico(cm)</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="w-50 mw-50 px-2">
+                    <div class="card mt-3 border-0 shadow-card">
+                        <div class="card-body">
+                            <div class="card-title mb-4"><h4>Antecedentes</h4></div>
+                                <div class="form-group">
+                                    <select class="custom-select form-control">
+                                        <option value="NULL">SIN ANTENCEDENTES PERSONALES</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-label-group">
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      id="personal"
+                                      placeholder="Descripcion personal"
+                                    />
+                                    <label for="personal">Descripcion personal</label>
+                                </div>
+                                <div class="form-group">
+                                    <select class="custom-select form-control">
+                                        <option value="NULL">SIN ANTENCEDENTES FAMILIARES</option>
+                                    </select>
+                                </div>
+                                <div class="form-label-group">
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      id="familiares"
+                                      placeholder="Descripcion familiares"
+                                    />
+                                    <label for="familiares">Descripcion familiares</label>
+                                  </div>
+                        </div>
+                    </div>
+
+                    <div class="card mt-3 border-0 shadow-card">
+                        <div class="card-body">
+                            <div class="card-title mb-4"><h4>Diagnosticos</h4></div>
+                            <div class="form-label-group">
+                                <input
+                                  type="text"
+                                  id="cie"
+                                  placeholder="Cie10"
+                                  class="form-control"
+                                />
+                                <label for="cie">Cie10</label>
+                              </div>
+                        </div>
+                    </div>
+
+                    <div class="card mt-3 border-0 shadow-card">
+                        <div class="card-body">
+                            <div class="card-title mb-4"><h4>Destino de Atencion</h4></div>
+                            <select class="custom-select form-control" >
+                                <option value="null">SELECCIONAR DE ATENCION</option>
+                                <option value="1">RECITA</option>
+                                <option value="2">INTERCONSULTA</option>
+                                <option value="3">ALTA</option>
+                                <option value="4">REFERENCIA</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button (click)="onSave()">Save</button>
+        </div>
+    </div>
+
