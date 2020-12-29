@@ -16,7 +16,7 @@ const routes: Routes = [
         {path:'programacion',component:ProgramacionComponent},
         {path:'pacientescitados',component:PacientescitadosComponent},
         {path:'agendamedica',component:AgendamedicaComponent},
-        { path: '**', component: Page404Component }
+        {path: '**', component: Page404Component }
       ]
   }
 

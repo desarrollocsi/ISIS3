@@ -11,13 +11,18 @@ export class StorageService {
 
 
   setUser(data:any){
+    localStorage.setItem('TOKEN',data.token)
     localStorage.setItem('MENU',JSON.stringify(data.menu))
   }
 
 
-
   getMenu(){
     return JSON.parse(localStorage.getItem('MENU'))
+  }
+
+
+  getToken(){
+    return localStorage.getItem('TOKEN');
   }
 
 }

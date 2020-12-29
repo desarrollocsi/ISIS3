@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs'
+
+import { HttpService } from '../../../../core/services/http.service'
+import { IntermediaryService } from '../../../../core/services/intermediary.service'
 
 @Component({
   selector: 'app-pacientescitados',
@@ -8,16 +12,30 @@ import { Router } from '@angular/router';
 })
 export class PacientescitadosComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  datosPacienes$:Observable<any>;
+
+  constructor(private router:Router,
+              private httpService:HttpService,
+              private intermediaryService:IntermediaryService
+              ) { }
 
   ngOnInit(): void {
-
+    this.datosPacienes$ = this.httpService.getPacientesCitados();
   }
 
 
-  acto(){
+
+  onData(data:any){
+    this.intermediaryService.getDatosPacientes(data)
     this.router.navigate(['admision/citas/agendamedica'])
   }
+
+
+
+
+
+
+
 
 
 }
