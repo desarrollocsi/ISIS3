@@ -20,9 +20,11 @@ export class AuthService {
     return this.http.post(`${environment.APIURL}/auth/login`,data)
   }
 
-
   getMenu(){
     return of(this.storageService.getMenu())
   }
+
+   
+
 
 }

@@ -25,4 +25,21 @@ export class StorageService {
     return localStorage.getItem('TOKEN');
   }
 
+
+  setAntecedentes(data:any){
+    if (data.length > 0 ){
+      localStorage.setItem('ANT',JSON.stringify(data))
+    }
+  }
+
+  getAntecedentes(){
+    return JSON.parse(localStorage.getItem('ANT'))
+  }
+
+  isAuthenticatedAnt(){
+    const ant =  this.getAntecedentes()
+    return ant === null? false:true;
+  }
+
+
 }
