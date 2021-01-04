@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { debounceTime,distinctUntilChanged } from 'rxjs/operators';
+import { FormBuilder, FormGroup,FormArray } from '@angular/forms';
+import { Observable,of } from 'rxjs';
+import { debounceTime,distinctUntilChanged,switchMap } from 'rxjs/operators';
 
 
 import { IntermediaryService } from '../../../../core/services/intermediary.service'
@@ -20,7 +20,11 @@ export class AgendamedicaComponent implements OnInit {
   antFamiliares$:Observable<any[]>;
   antPersonales$:Observable<any[]>;
   cies$:Observable<any[]>;
-
+  antecedentes$:Observable<any[]>;
+  a$:Observable<any[]>;
+  antecedentes:any;
+  diagnosticos:any;
+  diagnosticos$:Observable<any[]>;
 
   FormPartMed:FormGroup
 
@@ -35,25 +39,26 @@ export class AgendamedicaComponent implements OnInit {
     this.paciente$ = this.intermediaryService.data
     this.getAntecedentes()
     this.FormPartMed = this.fb.group({
+      idcita:[null],
       motivo:[null],
-      enfermedad:[null],
+      problema:[null],
       examen:[null],
-      presion:[null],
-      cardiaca:[null],
-      respiratoria:[null],
-      bucal:[null],
-      axilar:[null],
+      parterial:[null],
+      fcardiaca:[null],
+      frespiratoria:[null],
+      tbucal:[null],
+      taxilar:[null],
       peso:[null],
       talla:[null],
-      masa:[null],
-      perim:[null],
+      icorporal:[null],
+      pcefalico:[null],
       cie:[null],
+      diagnosticos:this.fb.array([]),
       antecedentes:this.fb.array([])
     })
-    
-  
-    this.antFamiliares$ = this.httpService.getAntFamiliares()
-    this.antPersonales$ = this.httpService.getAntPersonales()
+    this.antecedentes = this.FormPartMed.get('antecedentes') as FormArray;
+    this.diagnosticos = this.FormPartMed.get('diagnosticos') as FormArray;
+    this.antecedentes$ = of(this.storageService.getAntecedentes())
     this.getCie()
   }
 
@@ -62,6 +67,7 @@ export class AgendamedicaComponent implements OnInit {
     return this.FormPartMed.get('cie').valueChanges
   }
 
+ 
 
   getAntecedentes(){
     if(!this.storageService.isAuthenticatedAnt()){
@@ -69,22 +75,33 @@ export class AgendamedicaComponent implements OnInit {
     }
   }
 
-
-
   getCie(){
-    this.cie.pipe(debounceTime(800),distinctUntilChanged()).subscribe((data:string)=>{
-      this.searchCie(data)
-    })     
+    this.cies$ = this.cie.pipe(
+              debounceTime(500),
+              distinctUntilChanged(),
+              switchMap((data:any)=>this.httpService.getCie(data))
+              )
   }
 
+  addBackground(){
+    const group = this.fb.group({
+      id:[null],
+      descripcion:[null],
+      valor:[null]
+    })
+  this.antecedentes.push(group) 
+  }
 
-searchCie(data:string){
-  this.cies$ = this.httpService.getCie(data)
-}
-
-
-
-
+  addCie(data:any){
+    const group = this.fb.group({
+      data
+      // codigo:[null],
+      // descripcion:[null],
+      // tipo:[null]
+    })
+    this.diagnosticos.push(group)
+    this.diagnosticos$ = of(this.FormPartMed.get('diagnosticos').value)
+  }
 
 
 onSubmit(){

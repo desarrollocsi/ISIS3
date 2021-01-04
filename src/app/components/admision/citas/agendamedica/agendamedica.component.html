@@ -27,7 +27,7 @@
                             </div>
 
                             <div class="form-label-group">
-                                <textarea id="enfermedad"  placeholder="Enfermedad o Problema Actual" formControlName="enfermedad" class="form-control"></textarea>
+                                <textarea id="enfermedad"  placeholder="Enfermedad o Problema Actual" formControlName="problema" class="form-control"></textarea>
                                 <label for="enfermedad">Enfermedad o Problema Actual</label>
                             </div>
 
@@ -50,7 +50,7 @@
                                           id="presion"
                                           class="form-control"
                                           placeholder="Presion Arterial"
-                                          formControlName="presion"
+                                          formControlName="parterial"
                                         />
                                         <label for="presion">Presion Arterial</label>
                                       </div>
@@ -60,7 +60,7 @@
                                           type="text"
                                           id="frecuencia"
                                           class="form-control"
-                                          formControlName="cardiaca"
+                                          formControlName="fcardiaca"
                                           placeholder="F. Cardiaca(min)"
                                         />
                                         <label for="frecuencia">F. Cardiaca(min)</label>
@@ -71,7 +71,7 @@
                                           id="respiratoria"
                                           class="form-control"
                                           placeholder="F.Respiratoria(min)"
-                                          formControlName="respiratoria"
+                                          formControlName="frespiratoria"
                                         />
                                         <label for="respiratoria">F.Respiratoria(min)</label>
                                       </div>
@@ -81,7 +81,7 @@
                                           id="bucal"
                                           class="form-control"
                                           placeholder="Temp. Bucal(c)"
-                                          formControlName="bucal"
+                                          formControlName="tbucal"
                                         />
                                         <label for="bucal">Temp. Bucal(c)</label>
                                       </div>
@@ -91,7 +91,7 @@
                                           id="axiliar"
                                           class="form-control"
                                           placeholder="Temp. Axilar(c)"
-                                          formControlName="axilar"
+                                          formControlName="taxilar"
                                         />
                                         <label for="axiliar">Temp. Axilar(c)</label>
                                       </div>
@@ -123,7 +123,7 @@
                                           id="masa"
                                           class="form-control"
                                           placeholder="I.Masa corporal"
-                                          formControlName="masa"
+                                          formControlName="icorporal"
                                         /><label for="masa">I.Masa corporal</label>
                                     </div>
                                     <div class="form-label-group">
@@ -132,7 +132,7 @@
                                           id="perim"
                                           class="form-control"
                                           placeholder="Perim Cefalico(cm)"
-                                          formControlName="perim"
+                                          formControlName="pcefalico"
                                         /><label for="perim">Perim Cefalico(cm)</label>
                                     </div>
 
@@ -145,71 +145,76 @@
                 </div>
                 
                 <div class="w-50 mw-50 px-2">
-                    <ng-container formArrayName="antecedentes">
                     <div class="card mt-3 border-0 shadow-card">
-                        <div class="card-body">
-                            <div class="card-title mb-4"><h4>Antecedentes</h4></div>
-                                <div class="form-group">
-                                    <select class="custom-select form-control" formControlName="antPersonales">
-                                        <option [ngValue]="null">SIN ANTENCEDENTES PERSONALES</option>
-                                        <option [ngValue]="personales.id" *ngFor="let personales of  antPersonales$ | async">{{ personales.tipo }} /{{personales.descripcion}}</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-label-group">
-                                    <input
-                                      type="text"
-                                      class="form-control"
-                                      id="personal"
-                                      placeholder="Descripcion personal"
-                                    />
-                                    <label for="personal">Descripcion personal</label>
-                                </div>
-                                <div class="form-group">
-                                    <select class="custom-select form-control" formControlName="antFamiliares">
-                                        <option [ngValue]="null">SIN ANTENCEDENTES FAMILIARES</option>
-                                        <option [ngValue]="familiares.id" *ngFor="let familiares of antFamiliares$ | async">{{familiares.tipo}}/{{familiares.descripcion}}</option>
-                                    </select>
-                                </div>
-                                <div class="form-label-group">
-                                    <input
-                                      type="text"
-                                      class="form-control"
-                                      id="familiares"
-                                      placeholder="Descripcion familiares"
-                                    />
-                                    <label for="familiares">Descripcion familiares</label>
+                        <div class="card-body">                       
+                          <div class="card-title mb-4"><h4>Antecedentes</h4></div>
+                            <ng-container formArrayName="antecedentes">
+                              <div *ngFor="let _ of antecedentes.controls; index as i">
+                                <ng-container [formGroupName]="i">
+                                    <div class="form-group">
+                                      <select class="custom-select form-control" formControlName="id">
+                                          <option [ngValue]="null">SELECCIONAR ANTENCEDENTES</option>
+                                          <option [ngValue]="antecedente.id" *ngFor="let antecedente of antecedentes$ | async">{{antecedente.tipo}}/{{antecedente.descripcion}}</option>
+                                      </select>
+                                    </div>
+                                    <div class="form-label-group">
+                                      <input
+                                        type="text"
+                                        class="form-control"
+                                        id="personal"
+                                        placeholder="Descripcion personal"
+                                        formControlName="valor"
+                                      />
+                                      <label for="personal">Descripcion personal</label>
                                   </div>
+                                </ng-container>
+                              </div>
+                            </ng-container>
+                            <div class="card" (click)="addBackground()">
+                              <div class="card-body">
+                                <div class="card-text text-center">+Agregar antecedentes</div>
+                              </div>
+                            </div>
                         </div>
                     </div>
-                </ng-container>
+    
                     <div class="card mt-3 border-0 shadow-card">
-                        <div class="card-body">
-                            <div class="card-title mb-4"><h4>Diagnosticos</h4></div>
-                            <div class="form-label-group">
-                                <input
-                                  type="text"
-                                  id="cie"
-                                  placeholder="Cie10"
-                                  class="form-control"
-                                  formControlName="cie"
-                                />
-                                <label for="cie">Cie10</label>
+                          <div class="card-body">
+                              <div class="card-title mb-4"><h4>Diagnosticos</h4></div>
+                              <div class="form-label-group">
+                                  <input
+                                    type="text"
+                                    id="cie"
+                                    placeholder="Buscar cie 10"
+                                    class="form-control"
+                                    formControlName="cie"
+                                  />
+                                  <label for="cie">Buscar cie 10</label>
+                                </div>
+                                <div class="mb-4" *ngIf="cies$">
+                                  <ul class="list-group">
+                                      <li class="list-group-item" (click)="addCie(cie)" *ngFor="let cie of cies$ | async">{{cie.cie}} - {{cie.descripcion}}</li>
+                                  </ul> 
+                                </div>
+                          </div>
+                      </div>
+
+
+                    <ng-container formArrayName="diagnosticos">
+                      <div *ngFor="let _ of diagnosticos.controls; index as i">
+                        <ng-container [formGroupName]="i">
+                          <div class="card mt-3 border-0 shadow-card" *ngIf="diagnosticos$">
+                              <div class="card-body">
+                                  <ul class="list-group list-group-flush">
+                                      <li class="list-group-item" *ngFor="let diagnostico of diagnosticos$ | async">{{diagnostico.data.cie}} - {{diagnostico.data.descripcion}}</li>
+                                  </ul> 
                               </div>
-                              <div class="mb-4" *ngIf="cies$">
-                                <ul class="list-group">
-                                    <li class="list-group-item" *ngFor="let cie of cies$ | async">{{cie.cie}} - {{cie.descripcion}}</li>
-                                </ul> 
-                              </div>
-                        </div>
-                    </div>
-                    <!-- <div class="card mt-3 border-0 shadow-card">
-                        <div class="card-body">
-                            <ul class="list-group list-group-flush">
-                                <a href="#"><li class="list-group-item" *ngFor="let cie of cies$ | async">{{cie.cie}} - {{cie.descripcion}}</li></a>
-                              </ul> 
-                        </div>
-                    </div> -->
+                          </div>
+                        </ng-container>
+                      </div>
+                    </ng-container>
+
+
                     <div class="card mt-3 border-0 shadow-card">
                         <div class="card-body">
                             <div class="card-title mb-4"><h4>Destino de Atencion</h4></div>
@@ -226,7 +231,7 @@
             </div>
             <div class="row justify-content-center m-4">
                 <div class="col-md-6">
-                  <button type="submit">
+                  <button type="submit" class="button-ls">
                     <h5>Generar Acto Medico</h5>
                   </button>
                 </div>
@@ -234,8 +239,4 @@
         </div>
     </div>
 </form>
-
-
-
-
 
