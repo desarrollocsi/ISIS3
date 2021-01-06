@@ -14,8 +14,8 @@ const routes: Routes = [
     component:CitasComponent,
       children: [
         {path:'programacion',component:ProgramacionComponent},
-        {path:'pacientescitados',component:PacientescitadosComponent},
-        {path:'agendamedica',component:AgendamedicaComponent},
+        {path:'agendamedica',component:PacientescitadosComponent},
+        {path:'actomedico',component:AgendamedicaComponent},
         {path: '**', component: Page404Component }
       ]
   }

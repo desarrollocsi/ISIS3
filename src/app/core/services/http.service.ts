@@ -46,4 +46,10 @@ getCie(search:string):Observable<any[]>{
 }
 
 
+postRegister(data:any){ 
+  return this.http.post<any[]>(`${environment.APIURL}/auth/actomedicos`,data)
+}
+
+
+
 }

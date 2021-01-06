@@ -27,7 +27,7 @@ export class PacientescitadosComponent implements OnInit {
 
   onData(data:any){
     this.intermediaryService.getDatosPacientes(data)
-    this.router.navigate(['admision/citas/agendamedica'])
+    this.router.navigate(['admision/citas/actomedico'])
   }
 
 

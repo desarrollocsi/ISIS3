@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { CitasRoutingModule } from './citas-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 import { CitasComponent } from './citas.component';
 import { AgendamedicaComponent } from './agendamedica/agendamedica.component';
@@ -15,7 +16,8 @@ import { PacientescitadosComponent } from './pacientescitados/pacientescitados.c
   imports: [
     CommonModule,
     CitasRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ]
 })
 export class CitasModule { }
