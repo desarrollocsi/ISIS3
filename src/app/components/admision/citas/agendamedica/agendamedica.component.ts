@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
 import { FormBuilder, FormGroup,FormArray } from '@angular/forms';
 import { Observable,of } from 'rxjs';
-import { debounceTime,distinctUntilChanged,switchMap } from 'rxjs/operators';
+import { debounceTime,distinctUntilChanged,switchMap,map } from 'rxjs/operators';
 
 
 import { IntermediaryService } from '../../../../core/services/intermediary.service'
@@ -20,21 +20,16 @@ import { FormCie } from '../../../../core/models/form-cie.class'
 export class AgendamedicaComponent implements OnInit {
 
   paciente$:Observable<any[]>;
-  antFamiliares$:Observable<any[]>;
-  antPersonales$:Observable<any[]>;
   cies$:Observable<any[]>;
   antecedentes$:Observable<any[]>;
-  a$:Observable<any[]>;
   guard$:Observable<any[]>;
   antecedentes:any;
   diagnosticos:any;
   diagnosticos$:Observable<any[]>;
   FormPartMed:FormGroup
-  p: number = 1;
-
-
-  selectCie$:Observable<any[]>
+  add=[] 
   select=[]
+  p: number = 1;
 
 
   constructor(private router:Router,
@@ -46,6 +41,7 @@ export class AgendamedicaComponent implements OnInit {
 
   ngOnInit(): void {
     this.paciente$ = this.intermediaryService.data
+    
     this.FormPartMed = this.fb.group({
       idcita:[null],
       motivo:[null],
@@ -55,17 +51,20 @@ export class AgendamedicaComponent implements OnInit {
       fcardiaca:[null],
       frespiratoria:[null],
       tbucal:[null],
-      taxilar:[null],
+      taxiliar:[null],
       peso:[null],
       talla:[null],
       icorporal:[null],
       pcefalico:[null],
       cie:[null],
+      destino:[null],
       antecedentes:this.fb.array([]),
       diagnosticos:this.fb.array([])
     })
+
     this.getBackground()
     this.getCie()  
+    this.setIdcita()
     this.antecedentes$ = of(this.storageService.getAntecedentes())
     this.antecedentes = this.FormPartMed.get('antecedentes') as FormArray;
     this.diagnosticos = this.FormPartMed.get('diagnosticos') as FormArray;
@@ -80,6 +79,12 @@ export class AgendamedicaComponent implements OnInit {
     return this.FormPartMed.controls
   }
 
+  setIdcita(){
+    this.paciente$.subscribe((data:any)=>{
+      this.f.idcita.setValue(data.id)
+    })
+  }
+   
 
   getBackground(){
     if(!this.storageService.isAuthenticatedAnt()){
@@ -88,11 +93,11 @@ export class AgendamedicaComponent implements OnInit {
   }
 
   getCie(){
-    this.cies$ = this.cie.pipe(
-              debounceTime(900),
-              distinctUntilChanged(),
-              switchMap((data:any)=>this.httpService.getCie(data))
-              )
+  this.cies$ = this.cie.pipe(
+            debounceTime(900),
+            distinctUntilChanged(),
+            switchMap((data:any)=>this.httpService.getCie(data))
+            )
   }
 
   addBackground(){
@@ -104,23 +109,23 @@ export class AgendamedicaComponent implements OnInit {
   }
 
   addCie(data:any){
-    console.log(data)   
-    this.select.push(data)
+    this.select.push(data)   
     const group = this.fb.group({
-      id:[null],
-      cie:[null],
-      descripcion:[null]
+      idcie:[null],
+      tdx:[null]
     })    
-    this.diagnosticos.push(group)   
-    this.diagnosticos.setValue(this.select)
+    this.diagnosticos.push(group)
+    this.add.push(new FormCie(data)) 
+  }
+
+  setCie(){
+    this.diagnosticos.setValue(this.add)   
   }
 
 
-
 onSubmit(){
-  this.FormPartMed.controls.idcita.setValue('1000')
-  console.log(this.FormPartMed.value)
-  //this.guard$ = this.httpService.postRegister(this.FormPartMed.value)
+  this.setCie()   
+  this.guard$ = this.httpService.postRegister(this.FormPartMed.value)
 }
 
 

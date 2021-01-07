@@ -91,7 +91,7 @@
                                           id="axiliar"
                                           class="form-control"
                                           placeholder="Temp. Axilar(c)"
-                                          formControlName="taxilar"
+                                          formControlName="taxiliar"
                                         />
                                         <label for="axiliar">Temp. Axilar(c)</label>
                                       </div>
@@ -191,47 +191,31 @@
                                   />
                                   <label for="cie">Buscar cie 10</label>
                                 </div>
-                                <div class="mb-4">
-                                  <ul class="list-group" *ngIf="cies$">
-                                      <li class="list-group-item" (click)="addCie(cie)" *ngFor="let cie of cies$ | async | paginate: { itemsPerPage: 5, currentPage: p }">{{cie.cie}} - {{cie.descripcion}}</li>
+
+                                <div class="mb-4" *ngIf="cies$">
+                                  <ul class="list-group" > 
+                                        <li class="list-group-item" (click)="addCie(cie)" *ngFor="let cie of cies$ | async | paginate: { itemsPerPage: 5, currentPage: p };index as i">{{cie.cie}} - {{cie.descripcion}}</li>
                                   </ul> 
-                                  <ul class="list-group" >
-                                      <li class="list-group-item"><pagination-controls (pageChange)="p = $event"></pagination-controls></li>  
+                                  <ul class="list-group">
+                                      <li class="list-group-item">
+                                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                                      </li>  
                                   </ul>
                                 </div>
+
                           </div>
                       </div>
 
-                    <!-- <div class="card mt-3 border-0 shadow-card" *ngIf="diagnosticos.length > 0">
+                    <div class="card mt-3 border-0 shadow-card" *ngIf="select.length > 0 ">
                       <div class="card-body">
-                          <ng-container formArrayName="diagnosticos">
-                          <div *ngFor="let _ of diagnosticos.controls; index as i">
-                            <ng-container [formGroupName]="i">
-                              <div class="card mt-3">
-                                <div class="card-body">
-                                  <div class="form-group">
-                                    <input type="hidden" class="form-control" formControlName="codigo">
-                                  </div>
-                                    <input type="radio"  value="PRESUNTIVO" formControlName="tipo">Presuntivo
-                                    <input type="radio"  value="DEFINITIVO" formControlName="tipo">Definitivo                                
-                                    <input type="radio"  value="REPETITIVO" formControlName="tipo">Repetitivo
-                                </div>
-                              </div>
-                            </ng-container>
-                          </div>
-                        </ng-container>
-                      </div>
-                    </div> -->
-                    <div class="card mt-3 border-0 shadow-card">
-                      <div class="card-body">
-                        {{select | json}}
+                          {{select | json}}
                       </div>
                     </div>
 
                     <div class="card mt-3 border-0 shadow-card">
                         <div class="card-body">
                             <div class="card-title mb-4"><h4>Destino de Atencion</h4></div>
-                            <select class="custom-select form-control" >
+                            <select class="custom-select form-control" formControlName="destino">
                                 <option value="null">SELECCIONAR DE ATENCION</option>
                                 <option value="1">RECITA</option>
                                 <option value="2">INTERCONSULTA</option>
