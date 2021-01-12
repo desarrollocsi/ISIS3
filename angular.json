@@ -124,6 +124,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "isis"
+    }
+  },
+  "defaultProject": "isis",
+  "cli": {
+    "analytics": false
+  }
 }
