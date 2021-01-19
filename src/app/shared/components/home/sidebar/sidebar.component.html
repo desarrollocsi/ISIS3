@@ -4,10 +4,10 @@
     </div>
     <ul class="list-unstyled components">
         <li *ngFor="let menu of menus$ | async">
-            <a href="{{'#Menu'+menu.id}}"  data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">{{menu.nombre | titlecase}}</a>
+            <a href="{{'#Menu'+menu.id}}"  data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="{{'bi bi-'+menu.icono}}"></i>{{menu.nombre | titlecase}}</a>
             <ul  class="collapse" id="{{'Menu'+menu.id}}">
                 <li *ngFor="let submenu of menu.children">
-                    <a href="{{'#Submenu'+submenu.id}}" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">{{submenu.nombre | titlecase}}</a>
+                    <a href="{{'#Submenu'+submenu.id}}" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="{{'bi bi-'+menu.icono}}"></i>{{submenu.nombre | titlecase}}</a>
                     <ul class="collapse" id="{{'Submenu'+submenu.id}}">
                         <li *ngFor="let subsubmenu of submenu.children">
                             <a routerLink={{subsubmenu.accion}} >{{subsubmenu.nombre | titlecase}}</a>

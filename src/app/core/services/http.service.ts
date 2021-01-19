@@ -50,6 +50,11 @@ postRegister(data:any){
   return this.http.post<any[]>(`${environment.APIURL}/auth/actomedicos`,data)
 }
 
+getListaProgramacion(data:any):Observable<any[]>{ 
+  return this.http.get<any>(`http://192.168.10.144:8001/programaciones?fecha=${data.fecha}`)
+}
+
+
 
 
 }

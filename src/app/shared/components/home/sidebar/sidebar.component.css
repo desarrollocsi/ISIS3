@@ -13,6 +13,7 @@ a:focus {
   color: #fff;
   transition: all 0.3s;
   height: 100%;
+  /* border-right: solid #8CC8C8 1px; */
 }
 
 #sidebar.active {
@@ -23,6 +24,7 @@ a:focus {
   padding: 20px;
   background: #fff;
   color: #000;
+  border: solid #006742 1px;
 }
 
 #sidebar ul.components {
@@ -62,6 +64,9 @@ a[data-toggle="collapse"] {
   top: 50%;
   right: 20px;
   transform: translateY(-50%);
+}
+li {
+  list-style: none;
 }
 
 /* ul ul a {

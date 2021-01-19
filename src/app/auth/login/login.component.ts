@@ -35,7 +35,7 @@ formLogin:FormGroup;
     })
   }
 
-  private correctLogin(data:any){
+  private correctLogin(data:any){    
     this.storageServicie.setUser(data)
     this.router.navigate(['home'])
   }
