@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProgramacionCreateComponent } from './programacion-create.component';
+import { FormDynamicModalComponent } from './form-dynamic-modal.component';
 
-describe('ProgramacionCreateComponent', () => {
-  let component: ProgramacionCreateComponent;
-  let fixture: ComponentFixture<ProgramacionCreateComponent>;
+describe('FormDynamicModalComponent', () => {
+  let component: FormDynamicModalComponent;
+  let fixture: ComponentFixture<FormDynamicModalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProgramacionCreateComponent ]
+      declarations: [ FormDynamicModalComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProgramacionCreateComponent);
+    fixture = TestBed.createComponent(FormDynamicModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

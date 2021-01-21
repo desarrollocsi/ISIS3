@@ -9,11 +9,10 @@ a:focus {
 #sidebar {
   min-width: 280px;
   max-width: 280px;
-  background: #006742;
+  background: #009b6e;
   color: #fff;
   transition: all 0.3s;
   height: 100%;
-  /* border-right: solid #8CC8C8 1px; */
 }
 
 #sidebar.active {
@@ -21,15 +20,11 @@ a:focus {
 }
 
 .sidebar-header {
-  padding: 20px;
-  background: #fff;
-  color: #000;
-  border: solid #006742 1px;
+  width: 100%;
 }
 
 #sidebar ul.components {
   padding: 20px 0;
-  border-bottom: 1px solid #47748b;
 }
 
 #sidebar ul p {
@@ -39,19 +34,19 @@ a:focus {
 
 #sidebar ul li a {
   padding: 10px;
-  font-size: 1.1em;
+  font-size: 1em;
   display: block;
 }
 
 #sidebar ul li a:hover {
-  color: #000000;
-  background: #fff;
+  color: #fff;
+  background: #015837;
 }
 
 #sidebar ul li.active > a,
 a[aria-expanded="true"] {
   color: #fff;
-  background: #7bac82;
+  background: #015837;
 }
 
 a[data-toggle="collapse"] {
@@ -64,13 +59,22 @@ a[data-toggle="collapse"] {
   top: 50%;
   right: 20px;
   transform: translateY(-50%);
+  /* content: url("../../../../../assets//iconos/chevron-right.svg"); */
 }
+
 li {
   list-style: none;
 }
 
-/* ul ul a {
-  font-size: 0.9em !important;
-  padding-left: 30px !important;
-  background: #7bac82;
-} */
+.img-logo {
+  padding: 10px;
+  /* width: 100%; */
+}
+
+.img-user {
+  background-color: red;
+}
+
+img {
+  width: 100%;
+}

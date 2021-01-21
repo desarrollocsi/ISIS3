@@ -1,60 +1,63 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
-import { of,Observable } from 'rxjs'
+import { HttpClient } from '@angular/common/http';
+import { of, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import { environment } from '../../../environments/environment';
+import { StorageService } from './storage.service';
 
-import { environment } from '../../../environments/environment'
-import { StorageService } from './storage.service'
-
-
-@Injectable({providedIn: 'root'})
-
+@Injectable({ providedIn: 'root' })
 export class HttpService {
+  constructor(
+    private http: HttpClient,
+    private storageService: StorageService
+  ) {}
 
-  constructor(private http:HttpClient,private storageService:StorageService) { }
-
-
-
-getPacientesCitados(){
-  return this.http.get(`${environment.APIURL}/auth/citas?fecha=2020-10-26&medico=022`)
-}
-
-
-getAntecedentes(){  
-  return this.http.get(`${environment.APIURL}/auth/antecedentes`)
-}
-
-
-getAntFamiliares(){
-  return of(this.storageService.getAntecedentes()).pipe(
-    map(data => data.filter((x:any)=> x.tipo==='FAMILIARES')))
-}
-
-getAntPersonales(){
-  return of(this.storageService.getAntecedentes()).pipe(
-    map(data => data.filter((x:any)=> x.tipo !=='FAMILIARES')))
-}
-
-
-
-getCie(search:string):Observable<any[]>{
-  if (search.length === 0) {
-    return of([]);
+  getPacientesCitados() {
+    return this.http.get(
+      `${environment.APIURL}/auth/citas?fecha=2020-10-26&medico=022`
+    );
   }
-  return this.http.get<any[]>(`${environment.APIURL}/auth/cies?search=${search}`)
-}
 
+  getAntecedentes() {
+    return this.http.get(`${environment.APIURL}/auth/antecedentes`);
+  }
 
-postRegister(data:any){ 
-  return this.http.post<any[]>(`${environment.APIURL}/auth/actomedicos`,data)
-}
+  getAntFamiliares() {
+    return of(this.storageService.getAntecedentes()).pipe(
+      map((data) => data.filter((x: any) => x.tipo === 'FAMILIARES'))
+    );
+  }
 
-getListaProgramacion(data:any):Observable<any[]>{ 
-  return this.http.get<any>(`http://192.168.10.144:8001/programaciones?fecha=${data.fecha}`)
-}
+  getAntPersonales() {
+    return of(this.storageService.getAntecedentes()).pipe(
+      map((data) => data.filter((x: any) => x.tipo !== 'FAMILIARES'))
+    );
+  }
 
+  getCie(search: string): Observable<any[]> {
+    if (search.length === 0) {
+      return of([]);
+    }
+    return this.http.get<any[]>(
+      `${environment.APIURL}/auth/cies?search=${search}`
+    );
+  }
 
+  postRegister(data: any) {
+    return this.http.post<any[]>(
+      `${environment.APIURL}/auth/actomedicos`,
+      data
+    );
+  }
 
+  getListaProgramacion(fecha: string) {
+    return this.http.get<any>(
+      `http://192.168.10.144:8001/programacionesfecha?fecha=${fecha}`
+    );
+  }
 
+  getEspecialidad() {
+    return this.http.get<any>('http://192.168.10.144:8001/especialidades');
+  }
 }

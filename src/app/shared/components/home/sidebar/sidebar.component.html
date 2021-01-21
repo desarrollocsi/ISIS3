@@ -1,20 +1,42 @@
 <nav id="sidebar">
-    <div class="sidebar-header">
-        <img src="../../../../../assets/img/Logo-csi-color.svg">
+  <div class="sidebar-header">
+    <div class="img-logo">
+      <img src="../../../../../assets/img/Logo-csi-color.png" />
     </div>
-    <ul class="list-unstyled components">
-        <li *ngFor="let menu of menus$ | async">
-            <a href="{{'#Menu'+menu.id}}"  data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="{{'bi bi-'+menu.icono}}"></i>{{menu.nombre | titlecase}}</a>
-            <ul  class="collapse" id="{{'Menu'+menu.id}}">
-                <li *ngFor="let submenu of menu.children">
-                    <a href="{{'#Submenu'+submenu.id}}" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="{{'bi bi-'+menu.icono}}"></i>{{submenu.nombre | titlecase}}</a>
-                    <ul class="collapse" id="{{'Submenu'+submenu.id}}">
-                        <li *ngFor="let subsubmenu of submenu.children">
-                            <a routerLink={{subsubmenu.accion}} >{{subsubmenu.nombre | titlecase}}</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+  </div>
+  <ul class="list-unstyled components">
+    <li *ngFor="let menu of menus$ | async">
+      <a
+        href="{{ '#Menu' + menu.id }}"
+        data-toggle="collapse"
+        aria-expanded="false"
+        class="dropdown-toggle"
+        ><i class="{{ 'bi bi-' + menu.icono }} mr-2"></i
+        >{{ menu.nombre | titlecase }}</a
+      >
+      <ul class="collapse" id="{{ 'Menu' + menu.id }}">
+        <li *ngFor="let submenu of menu.children">
+          <a
+            href="{{ '#Submenu' + submenu.id }}"
+            data-toggle="collapse"
+            aria-expanded="false"
+            class="dropdown-toggle"
+            ><i class="{{ 'bi bi-' + menu.icono }} mr-2"></i
+            >{{ submenu.nombre | titlecase }}</a
+          >
+          <ul class="collapse" id="{{ 'Submenu' + submenu.id }}">
+            <li *ngFor="let subsubmenu of submenu.children">
+              <a
+                routerLink="{{ subsubmenu.accion }}"
+                (click)="onRoute(subsubmenu.accion)"
+              >
+                <i class="{{ 'bi bi-' + menu.icono }} mr-2"></i>
+                {{ subsubmenu.nombre | titlecase }}</a
+              >
+            </li>
+          </ul>
         </li>
-    </ul>
+      </ul>
+    </li>
+  </ul>
 </nav>

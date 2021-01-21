@@ -1,0 +1,53 @@
+<ng-container *ngIf="formulario as forms">
+  <div
+    class="modal fade"
+    id="miModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">{{ forms.nombre }}</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-hidden="true"
+            >
+              &times;
+            </button>
+          </div>
+          <div class="modal-body">
+            <ng-container *ngFor="let form of forms.formulariod">
+              <label>{{ form.label }}</label>
+              <div [ngSwitch]="form.controltype">
+                <div class="form-group" *ngSwitchCase="'textbox'">
+                  <input
+                    [type]="form.type"
+                    [id]="form.key"
+                    [formControlName]="form.key"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+            </ng-container>
+          </div>
+          <div class="modal-footer">
+            <div class="form-group">
+              <button type="submit" class="btn btn-success">guardar</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <ng-container *ngIf="response$">
+    <div class="alert alert-success" role="alert">
+      {{ response$ | async | json }}
+    </div>
+  </ng-container>
+</ng-container>

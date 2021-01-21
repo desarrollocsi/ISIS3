@@ -3,13 +3,10 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-citas',
   template: `<router-outlet></router-outlet>`,
-  styleUrls: []
+  styleUrls: [],
 })
 export class CitasComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
