@@ -1,45 +1,41 @@
 import { Injectable } from '@angular/core';
 
-
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StorageService {
+  constructor() {}
 
-  constructor() { }
-
-
-  setUser(data:any){
-    localStorage.setItem('TOKEN',data.token)
-    localStorage.setItem('MENU',JSON.stringify(data.menu))
+  setUser(data: any) {
+    localStorage.setItem('TOKEN', data.token);
+    localStorage.setItem('MENU', JSON.stringify(data.menu));
+    localStorage.setItem('USER', JSON.stringify(data.usuario.name));
   }
 
-
-  getMenu(){
-    return JSON.parse(localStorage.getItem('MENU'))
-  }
-
-
-  getToken(){
-    return localStorage.getItem('TOKEN');
-  }
-
-
-  setAntecedentes(data:any){
-    if (data.length > 0 ){
-      localStorage.setItem('ANT',JSON.stringify(data))
+  setAntecedentes(data: any) {
+    if (data.length > 0) {
+      localStorage.setItem('ANT', JSON.stringify(data));
     }
   }
 
-  getAntecedentes(){
-    return JSON.parse(localStorage.getItem('ANT'))
+  getAntecedentes() {
+    return JSON.parse(localStorage.getItem('ANT'));
   }
 
-  isAuthenticatedAnt(){
-    const ant =  this.getAntecedentes()
-    return ant === null? false:true;
+  getUser() {
+    return JSON.parse(localStorage.getItem('USER'));
   }
 
+  getMenu() {
+    return JSON.parse(localStorage.getItem('MENU'));
+  }
 
+  getToken() {
+    return localStorage.getItem('TOKEN');
+  }
+
+  isAuthenticatedAnt() {
+    const ant = this.getAntecedentes();
+    return ant === null ? false : true;
+  }
 }

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+
 import { switchMap } from 'rxjs/operators';
+
 import { FormDynamicService } from 'src/app/core/services/form-dynamic.service';
 import { IntermediaryService } from 'src/app/core/services/intermediary.service';
 
@@ -16,31 +17,37 @@ export class FormDynamicModalComponent implements OnInit {
   forms$: Observable<any>;
   response$: Observable<any>;
   formulario: any;
+  title: string;
+
+  @Input() isModePut: boolean;
   constructor(
-    private router: Router,
     private fb: FormBuilder,
     private fds: FormDynamicService,
     private is: IntermediaryService
   ) {}
 
   ngOnInit(): void {
-    this.form = this.fb.group({});
     this.onFormDynamic();
+    this.form = this.fb.group({});
   }
 
   onFormDynamic() {
+    console.log('Formdynamic');
     this.is.formDynamic.subscribe((data: any) => {
       if (data.length !== 0) {
-        this.form = this.fds.formGroup(data.formulariod);
+        this.form = this.fds.formGroup(data);
       }
       this.formulario = data;
     });
   }
 
   onSubmit() {
+    console.log('submit');
+    const type = this.isModePut ? 'PUT' : 'POST';
+
     this.response$ = this.is.route.pipe(
       switchMap((route: string) =>
-        this.fds.getDynamicApi(route, 'POST', this.form.value)
+        this.fds.getDynamicApi(route, type, this.form.value)
       )
     );
   }

@@ -28,10 +28,10 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.FormLogin.value);
-    // this.authService.getLogin(this.FormLogin.value).subscribe((data) => {
-    //   this.correctLogin(data);
-    // });
+    // console.log(this.FormLogin.value);
+    this.authService.getLogin(this.FormLogin.value).subscribe((data) => {
+      this.correctLogin(data);
+    });
   }
 
   private correctLogin(data: any) {

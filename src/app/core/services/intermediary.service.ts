@@ -14,17 +14,24 @@ export class IntermediaryService {
   private fd = new BehaviorSubject<any>([]);
   formDynamic = this.fd.asObservable();
 
+  private setData = new BehaviorSubject<any>([]);
+  getData = this.setData.asObservable();
+
   constructor() {}
 
   getDatosPacientes(data: any) {
     this.paciente.next(data);
   }
 
-  getRoute(route: any) {
+  subjectRoute(route: any) {
     this.router.next(route);
   }
 
-  getFormDynamic(formDynamic: any) {
+  subjectFormDynamic(formDynamic: any) {
     this.fd.next(formDynamic);
+  }
+
+  subjectData(data: Object) {
+    this.setData.next(data);
   }
 }

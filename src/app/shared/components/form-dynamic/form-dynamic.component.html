@@ -1,40 +1,57 @@
 <ng-container *ngIf="datas$">
-  <ng-container *ngIf="modal">
-    <app-form-dynamic-modal></app-form-dynamic-modal>
-  </ng-container>
   <div class="card">
     <div class="card-body">
-      <div class="d-flex mb-4 p-2">
-        <ng-container *ngIf="route$ | async as route">
+      <ng-container *ngIf="route$ | async as route">
+        <div class="d-flex mb-4 p-2">
           <button
             class="btn btn-success"
             data-toggle="modal"
             data-target="#miModal"
-            (click)="onData(route)"
+            (click)="onFormDynamic(route)"
           >
             +add
           </button>
-        </ng-container>
-      </div>
-      <table class="table table-striped table-hover">
-        <tr>
-          <th>CODIGO</th>
-          <th>DESCRIPCION</th>
-        </tr>
-        <tr
-          *ngFor="
-            let data of datas$
-              | async
-              | paginate: { itemsPerPage: 5, currentPage: p }
-          "
-        >
-          <td>{{ data.codigo }}</td>
-          <td>{{ data.descripcion }}</td>
-        </tr>
-      </table>
-      <div class="d-flex justify-content-center">
+        </div>
+        <table class="table table-striped table-hover text-center">
+          <tr>
+            <th>CODIGO</th>
+            <th>DESCRIPCION</th>
+            <th colspan="2">ACTION</th>
+          </tr>
+          <tr
+            *ngFor="
+              let data of datas$
+                | async
+                | paginate: { itemsPerPage: 5, currentPage: p }
+            "
+          >
+            <td>{{ data.codigo }}</td>
+            <td>{{ data.descripcion }}</td>
+            <td>
+              <button
+                class="btn btn-success"
+                data-toggle="modal"
+                data-target="#miModal"
+                (click)="onFormDynamic(route, data)"
+              >
+                Edit
+              </button>
+            </td>
+            <td>
+              <button class="btn btn-primary" (click)="onDelete(data)">
+                Delete
+              </button>
+            </td>
+          </tr>
+        </table>
+      </ng-container>
+      <div class="d-flex justify-content-center mb-4">
         <pagination-controls (pageChange)="p = $event"></pagination-controls>
       </div>
     </div>
   </div>
 </ng-container>
+<ng-container *ngIf="modal">
+  <app-form-dynamic-modal [isModePut]="isModePut"></app-form-dynamic-modal>
+</ng-container>
+<ng-container *ngIf="response$"> {{response$| async |json} </ng-container>

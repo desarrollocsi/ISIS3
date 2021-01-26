@@ -22,6 +22,7 @@ export class SidebarComponent implements OnInit {
 
   onRoute(ruta: string) {
     const a = ruta.toString().split('/');
-    this.is.getRoute(a[3]);
+    console.log(ruta);
+    this.is.subjectRoute(a[3]);
   }
 }
